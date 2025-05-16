@@ -26055,3 +26055,19 @@ body.tmp-white-version.color-primary-3rd .services-widget.v2 .active-bg {
   max-width: 100px; /* Adjust width as needed */
   height: auto; /* Maintain aspect ratio */
 }
+.whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 60px;               /* Equal width */
+    height: 60px;              /* Equal height */
+    background-color: #25d366;
+    color: white;
+    border-radius: 50%;        /* Circle shape */
+    font-size: 24px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    z-index: 9999;
+    text-align: center;
+    line-height: 60px;         /* Vertically center the icon */
+    transition: background-color 0.3s;
+}

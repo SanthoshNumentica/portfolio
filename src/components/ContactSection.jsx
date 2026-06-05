@@ -20,9 +20,9 @@ export default function ContactSection() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('submitting');
-    
+
     try {
-      const response = await fetch('http://localhost:5000/contact', {
+      const response = await fetch('https://santhoshs.co.in/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

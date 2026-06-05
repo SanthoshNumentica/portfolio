@@ -46,38 +46,15 @@ export default function ProjectsSection() {
       {/* Grid of Projects */}
       <div className="projects-showcase-grid">
         {projects.map((proj, idx) => (
-          <div 
-            key={idx} 
+          <div
+            key={idx}
             className="portfolio-card reveal-scale"
             style={{ transitionDelay: `${idx * 0.2}s` }}
           >
             {/* Project Image Box with Hover Overlay links */}
             <div className="portfolio-img-box">
-              <div className="portfolio-overlay">
-                <a
-                  href={proj.demoUrl}
-                  className="portfolio-action-link"
-                  data-bs-toggle="tooltip"
-                  data-bs-placement="top"
-                  title="Live Demo"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i className="bi bi-eye-fill"></i>
-                </a>
-                <a
-                  href={proj.githubUrl}
-                  className="portfolio-action-link"
-                  data-bs-toggle="tooltip"
-                  data-bs-placement="top"
-                  title="GitHub"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i className="bi bi-github"></i>
-                </a>
-              </div>
-              
+
+
               {/* Fallback styling icon if image is loaded statically */}
               <div
                 className="d-flex align-items-center justify-content-center w-100 h-100"
@@ -105,26 +82,9 @@ export default function ProjectsSection() {
                     <li key={bIdx} className="mb-2">{bullet}</li>
                   ))}
                 </ul>
-                
+
                 {/* Mobile/Tablet direct action buttons */}
-                <div className="portfolio-mobile-links">
-                  <a
-                    href={proj.demoUrl}
-                    className="portfolio-mobile-btn"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <i className="bi bi-eye-fill"></i> Live Demo
-                  </a>
-                  <a
-                    href={proj.githubUrl}
-                    className="portfolio-mobile-btn"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <i className="bi bi-github"></i> GitHub
-                  </a>
-                </div>
+
               </div>
 
               <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.04)', paddingTop: 'var(--space-md)' }}>

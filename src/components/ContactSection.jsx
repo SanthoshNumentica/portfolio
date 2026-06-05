@@ -17,12 +17,23 @@ export default function ContactSection() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('submitting');
     
-    // Simulate API submission
-    setTimeout(() => {
+    try {
+      const response = await fetch('http://localhost:5000/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+
       setStatus('success');
       setFormData({
         name: '',
@@ -30,7 +41,10 @@ export default function ContactSection() {
         subject: '',
         message: ''
       });
-    }, 1500);
+    } catch (error) {
+      console.error('Submission error:', error);
+      setStatus('error');
+    }
   };
 
   return (
@@ -55,6 +69,13 @@ export default function ContactSection() {
               <div className="alert alert-success border-0 text-center mb-4" style={{ backgroundColor: 'rgba(0, 255, 170, 0.08)', color: 'var(--accent)', borderRadius: '4px' }}>
                 <i className="bi bi-check-circle-fill me-2"></i>
                 Thank you! Your message has been sent successfully.
+              </div>
+            )}
+
+            {status === 'error' && (
+              <div className="alert alert-danger border-0 text-center mb-4" style={{ backgroundColor: 'rgba(255, 75, 75, 0.08)', color: '#ff4b4b', borderRadius: '4px' }}>
+                <i className="bi bi-exclamation-triangle-fill me-2"></i>
+                Oops! Failed to send your message. Please check your connection or try again later.
               </div>
             )}
 

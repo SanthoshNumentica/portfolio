@@ -16,8 +16,12 @@
   --border-medium: rgba(255, 255, 255, 0.08);
   --border-strong: rgba(255, 255, 255, 0.15);
   --card-shadow: rgba(0, 0, 0, 0.5);
+
+  /* Skills Inactive Tab Variables */
+  --tab-bg-inactive: rgba(255, 255, 255, 0.02);
+  --tab-border-inactive: rgba(255, 255, 255, 0.06);
   
-  /* Space system */
+  /* Space system System */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
@@ -60,6 +64,10 @@ body.light-theme {
   --border-medium: rgba(0, 0, 0, 0.12);
   --border-strong: rgba(0, 0, 0, 0.2);
   --card-shadow: rgba(0, 0, 0, 0.08);
+
+  /* Skills Inactive Tab Variables */
+  --tab-bg-inactive: rgba(0, 0, 0, 0.03);
+  --tab-border-inactive: rgba(0, 0, 0, 0.08);
 }
 
 /* Base Styles */
@@ -98,7 +106,7 @@ h1, h2, h3, h4, h5, h6, .anta-font {
 
 /* Navbar */
 .navbar {
-  background: transparent !important;
+  background: rgba(12, 15, 20, 0.8) !important;
   backdrop-filter: blur(16px) saturate(160%);
   padding: var(--space-md) var(--space-xl);
   position: sticky;
@@ -509,21 +517,92 @@ section {
 /* Detailed Technical Stack List */
 .tech-list-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 1.5rem;
 }
 
 .tech-progress-box {
-  background: var(--card-bg);
-  border: 1px solid var(--border-light);
+  background: radial-gradient(circle at 50% 30%, rgba(20, 26, 36, 0.95) 0%, rgba(12, 15, 20, 0.98) 100%);
+  border: 1px solid var(--border-medium);
+  border-left: 4px solid var(--loki-gold);
   border-radius: var(--radius-sm);
-  padding: var(--space-md) var(--space-lg);
+  padding: var(--space-lg);
   opacity: 0;
+  position: relative;
+  overflow: hidden;
   animation: scale-up-fade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  cursor: default;
+  backdrop-filter: blur(12px);
+}
+
+.tech-progress-box::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.12) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+  z-index: 10;
+  background-size: 100% 4px, 6px 100%;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.tech-progress-box:hover {
+  border-color: var(--loki-gold);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 25px rgba(255, 215, 0, 0.12);
+}
+
+.tech-icon-wrapper {
+  width: 42px;
+  height: 42px;
+  background: rgba(0, 255, 170, 0.04);
+  border: 1px solid rgba(0, 255, 170, 0.12);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--loki-magic);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.tech-progress-box:hover .tech-icon-wrapper {
+  background: rgba(0, 255, 170, 0.1);
+  border-color: var(--loki-magic);
+  transform: scale(1.05);
+}
+
+.tech-icon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  transition: filter var(--transition-fast);
+}
+
+.tech-progress-box:hover .tech-icon {
+  filter: drop-shadow(0 0 6px var(--loki-magic));
+}
+
+.proficiency-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--loki-magic);
+  border: 1px solid var(--loki-magic-dim);
+  background: rgba(0, 255, 170, 0.06);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-family: "Anta", sans-serif;
+  display: inline-block;
+  align-self: center;
+  text-shadow: 0 0 5px var(--loki-magic);
+  box-shadow: 0 0 8px rgba(0, 255, 170, 0.1);
 }
 
 .progress-bar-container {
-  height: 5px;
+  height: 6px;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 3px;
   overflow: hidden;
@@ -531,8 +610,646 @@ section {
 
 .progress-fill {
   height: 100%;
-  background: var(--accent);
+  background: repeating-linear-gradient(90deg, var(--loki-magic) 0px, var(--loki-magic) 6px, transparent 6px, transparent 9px);
   border-radius: 3px;
+  transition: width 1s ease-in-out;
+  filter: drop-shadow(0 0 4px var(--loki-magic));
+}
+
+.sub-skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+  position: relative;
+  z-index: 15;
+}
+
+.sub-skill-tag {
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-light);
+  color: var(--muted);
+  border-radius: 4px;
+  transition: all var(--transition-fast);
+}
+
+.tech-progress-box:hover .sub-skill-tag {
+  border-color: var(--border-medium);
+  color: var(--white);
+}
+
+.sub-skill-tag:hover {
+  background: rgba(0, 255, 170, 0.05) !important;
+  color: var(--accent) !important;
+  border-color: rgba(0, 255, 170, 0.25) !important;
+}
+
+/* ==========================================
+   LIGHT THEME OVERRIDES FOR SKILLS SECTION
+   ========================================== */
+body.light-theme .tech-progress-box {
+  background: radial-gradient(circle at 50% 30%, rgba(245, 247, 250, 0.98) 0%, rgba(255, 255, 255, 1) 100%);
+  border-color: var(--border-medium);
+  border-left: 4px solid var(--loki-gold);
+  box-shadow: 0 10px 25px var(--card-shadow);
+}
+
+body.light-theme .tech-progress-box:hover {
+  border-color: var(--accent);
+  box-shadow: 0 12px 30px var(--accent-glow);
+}
+
+body.light-theme .tech-progress-box::after {
+  background: linear-gradient(rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.04) 50%), 
+              linear-gradient(90deg, rgba(0, 170, 124, 0.005), rgba(0, 0, 0, 0.005), rgba(0, 170, 124, 0.005));
+  opacity: 0.65;
+}
+
+body.light-theme .tech-icon-wrapper {
+  background: rgba(0, 170, 124, 0.05);
+  border-color: rgba(0, 170, 124, 0.15);
+}
+
+body.light-theme .tech-progress-box:hover .tech-icon-wrapper {
+  background: rgba(0, 170, 124, 0.12);
+  border-color: var(--loki-magic);
+}
+
+body.light-theme .tech-progress-box:hover .tech-icon {
+  filter: none;
+}
+
+body.light-theme .proficiency-badge {
+  background: rgba(0, 170, 124, 0.08);
+  text-shadow: none;
+  box-shadow: none;
+}
+
+body.light-theme .progress-bar-container {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+body.light-theme .progress-fill {
+  filter: none;
+}
+
+body.light-theme .sub-skill-tag {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+body.light-theme .tva-scanlines {
+  background: linear-gradient(
+    rgba(255, 255, 255, 0) 0%,
+    rgba(0, 170, 124, 0.012) 10%,
+    rgba(255, 255, 255, 0) 20%
+  );
+}
+
+body.light-theme .navbar {
+  background: rgba(240, 242, 245, 0.8) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+
+/* Yggdrasil Cosmic Tree Layout */
+:root {
+  --loki-magic: #00ffaa;
+  --loki-magic-dim: rgba(0, 255, 170, 0.15);
+  --loki-magic-light: rgba(0, 255, 170, 0.03);
+  --loki-gold: #ffd700;
+  --loki-gold-dim: rgba(255, 215, 0, 0.25);
+  --loki-gold-light: rgba(255, 215, 0, 0.05);
+}
+
+body.light-theme {
+  --loki-magic: #00aa7c;
+  --loki-magic-dim: rgba(0, 170, 124, 0.15);
+  --loki-magic-light: rgba(0, 170, 124, 0.03);
+  --loki-gold: #c69b00;
+  --loki-gold-dim: rgba(198, 155, 0, 0.25);
+  --loki-gold-light: rgba(198, 155, 0, 0.05);
+}
+
+.yggdrasil-section-wrapper {
+  display: flex;
+  gap: 2rem;
+  align-items: stretch;
+  margin-top: 2rem;
+}
+
+.yggdrasil-tree-panel {
+  flex: 1.35;
+  background: radial-gradient(circle at center, rgba(20, 26, 36, 0.45) 0%, transparent 85%);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 35px rgba(0, 0, 0, 0.45);
+}
+
+.yggdrasil-details-panel {
+  flex: 0.85;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.yggdrasil-svg {
+  width: 100%;
+  height: auto;
+  max-width: 720px;
+  overflow: visible;
+}
+
+/* Layered Branch Ribbons */
+.branch-glow {
+  stroke: var(--loki-magic);
+  stroke-width: 6px;
+  opacity: 0.03;
+  fill: none;
+  stroke-linecap: round;
+  filter: blur(4px);
+  transition: stroke var(--transition-normal), opacity var(--transition-normal), stroke-width var(--transition-normal);
+}
+
+.active-branch .branch-glow {
+  opacity: 0.16;
+  stroke-width: 8px;
+}
+
+.branch-core {
+  stroke: var(--loki-magic-dim);
+  stroke-width: 1.5px;
+  fill: none;
+  stroke-linecap: round;
+  transition: stroke var(--transition-normal), stroke-width var(--transition-normal), filter var(--transition-normal);
+}
+
+.active-branch .branch-core {
+  stroke: var(--loki-magic);
+  stroke-width: 2px;
+  filter: drop-shadow(0 0 4px var(--loki-magic));
+}
+
+.branch-energy {
+  fill: none;
+  stroke: var(--loki-magic);
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-dasharray: 6 28;
+  animation: energy-flow 1.8s linear infinite;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+@keyframes energy-flow {
+  from {
+    stroke-dashoffset: 34;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Float Animations for Staggered Sways */
+@keyframes yggdrasil-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-7px); }
+}
+
+.float-node-1 { animation: yggdrasil-float 6.5s ease-in-out infinite; }
+.float-node-2 { animation: yggdrasil-float 7.2s ease-in-out infinite 0.8s; }
+.float-node-3 { animation: yggdrasil-float 6.8s ease-in-out infinite 1.6s; }
+.float-node-4 { animation: yggdrasil-float 7.8s ease-in-out infinite 0.4s; }
+.float-node-5 { animation: yggdrasil-float 6.2s ease-in-out infinite 1.2s; }
+.float-node-6 { animation: yggdrasil-float 7.0s ease-in-out infinite 2.0s; }
+
+/* Tree Nodes */
+.timeline-node {
+  cursor: pointer;
+  pointer-events: all;
+  outline: none;
+}
+
+.node-orbit-ring {
+  fill: none;
+  stroke: var(--border-medium);
+  stroke-width: 0.8px;
+  stroke-dasharray: 4 6;
+  transform-origin: center;
+  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+}
+
+.timeline-node:hover .node-orbit-ring,
+.timeline-node.active-node .node-orbit-ring {
+  stroke: var(--loki-magic);
+  stroke-width: 1px;
+  animation: orbit-rotate 12s linear infinite;
+}
+
+@keyframes orbit-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.node-glow-ring {
+  fill: none;
+  stroke: var(--loki-magic);
+  stroke-width: 1;
+  opacity: 0;
+  transform-origin: center;
+  transition: opacity 0.3s ease;
+}
+
+.timeline-node:hover .node-glow-ring,
+.timeline-node.active-node .node-glow-ring {
+  opacity: 0.8;
+  animation: node-pulse 2.2s infinite ease-out;
+}
+
+@keyframes node-pulse {
+  0% { transform: scale(0.92); opacity: 0.8; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+
+.node-circle {
+  fill: var(--card-bg);
+  stroke: var(--border-strong);
+  stroke-width: 1.5;
+  transition: fill 0.3s ease, stroke 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+  transform-origin: center;
+}
+
+.timeline-node:hover .node-circle,
+.timeline-node.active-node .node-circle {
+  fill: var(--loki-magic-light);
+  stroke: var(--loki-magic);
+  transform: scale(1.12);
+  filter: drop-shadow(0 0 8px rgba(0, 255, 170, 0.4));
+}
+
+.node-icon-g {
+  color: var(--muted);
+  transition: color 0.3s ease, transform 0.3s ease;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+.timeline-node:hover .node-icon-g,
+.timeline-node.active-node .node-icon-g {
+  color: var(--loki-magic);
+  transform: scale(1.12);
+  filter: drop-shadow(0 0 3px var(--loki-magic));
+}
+
+/* Loki Crown (Base) */
+.loki-crown-g {
+  cursor: pointer;
+  outline: none;
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.crown-wave {
+  fill: none;
+  stroke: var(--loki-gold);
+  stroke-width: 1;
+  opacity: 0;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+.loki-crown-g:hover .crown-wave,
+.loki-crown-g.active-reset .crown-wave {
+  animation: crown-pulse 3.2s infinite ease-out;
+}
+
+.loki-crown-g:hover .crown-wave-2,
+.loki-crown-g.active-reset .crown-wave-2 {
+  animation: crown-pulse 3.2s infinite ease-out 1.6s;
+}
+
+@keyframes crown-pulse {
+  0% { transform: scale(0.85); opacity: 0.6; }
+  100% { transform: scale(1.85); opacity: 0; }
+}
+
+.crown-circle {
+  fill: var(--card-bg);
+  stroke: var(--loki-gold-dim);
+  stroke-width: 2;
+  transition: all 0.4s ease;
+}
+
+.loki-crown-g:hover .crown-circle,
+.loki-crown-g.active-reset .crown-circle {
+  stroke: var(--loki-gold);
+  fill: var(--loki-gold-light);
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.35));
+  transform: scale(1.04);
+}
+
+.crown-path {
+  fill: var(--loki-gold-dim);
+  transition: fill 0.4s ease, filter 0.4s ease;
+}
+
+.loki-crown-g:hover .crown-path,
+.loki-crown-g.active-reset .crown-path {
+  fill: var(--loki-gold);
+  filter: drop-shadow(0 0 4px var(--loki-gold));
+}
+
+/* Category Label Badges on Tree */
+.tree-category-label {
+  font-family: 'Anta', sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  fill: var(--muted);
+  pointer-events: none;
+  transition: fill 0.3s ease, filter 0.3s ease;
+}
+
+.active-category-label {
+  fill: var(--loki-magic);
+  filter: drop-shadow(0 0 3px var(--loki-magic));
+}
+
+/* TVA Monitor Screen */
+.tva-monitor {
+  background: radial-gradient(circle at 50% 30%, rgba(20, 26, 36, 0.96) 0%, rgba(12, 15, 20, 0.99) 100%);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  border-left: 5px solid var(--loki-gold);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.55);
+  transition: border-color 0.3s ease;
+  backdrop-filter: blur(12px);
+}
+
+.tva-monitor::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+  z-index: 10;
+  background-size: 100% 4px, 6px 100%;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.tva-scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 0%,
+    rgba(0, 255, 170, 0.015) 10%,
+    rgba(18, 16, 16, 0) 20%
+  );
+  background-size: 100% 40px;
+  animation: tva-scan 14s linear infinite;
+  pointer-events: none;
+  z-index: 5;
+}
+
+@keyframes tva-scan {
+  from { background-position-y: 0px; }
+  to { background-position-y: 800px; }
+}
+
+.tva-header {
+  border-bottom: 1px dashed var(--border-medium);
+  padding-bottom: 0.85rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tva-monitor-title {
+  font-family: 'Anta', sans-serif;
+  color: var(--loki-gold);
+  font-size: var(--text-base);
+  letter-spacing: 0.8px;
+  margin: 0;
+  text-shadow: 0 0 5px rgba(255, 215, 0, 0.35);
+}
+
+.tva-badge-glow {
+  color: var(--loki-magic);
+  border: 1px solid var(--loki-magic-dim);
+  background: rgba(0, 255, 170, 0.06);
+  text-shadow: 0 0 5px var(--loki-magic);
+  box-shadow: 0 0 8px rgba(0, 255, 170, 0.1);
+}
+
+.tva-terminal-text {
+  font-family: monospace;
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.tva-accent-text {
+  color: var(--loki-magic);
+  text-shadow: 0 0 2px var(--loki-magic);
+}
+
+.tva-gold-text {
+  color: var(--loki-gold);
+  text-shadow: 0 0 2px rgba(255, 215, 0, 0.3);
+}
+
+/* Circular Telemetry Gauge */
+.tva-gauge-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 90px;
+  height: 90px;
+  margin: 0 auto;
+}
+
+.tva-gauge-circle-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.05);
+  stroke-width: 5;
+}
+
+.tva-gauge-circle-fill {
+  fill: none;
+  stroke: var(--loki-magic);
+  stroke-width: 5.5;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: center;
+  transition: stroke-dasharray 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+  filter: drop-shadow(0 0 5px rgba(0, 255, 170, 0.5));
+}
+
+.tva-gauge-label {
+  position: absolute;
+  font-family: 'Anta', sans-serif;
+  font-size: var(--text-sm);
+  color: var(--white);
+  font-weight: bold;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
+}
+
+/* Runic Halo & Rotations */
+.runic-halo-ring {
+  fill: none;
+  stroke: var(--loki-magic-dim);
+  stroke-width: 1px;
+  transition: stroke var(--transition-normal), filter var(--transition-normal);
+}
+
+.yggdrasil-tree-panel:hover .runic-halo-ring {
+  stroke: var(--loki-magic);
+  filter: drop-shadow(0 0 3px var(--loki-magic));
+}
+
+.runic-text {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  fill: var(--loki-magic-dim);
+  letter-spacing: 2px;
+  transition: fill var(--transition-normal), filter var(--transition-normal);
+}
+
+.yggdrasil-tree-panel:hover .runic-text {
+  fill: var(--loki-magic);
+  filter: drop-shadow(0 0 4px var(--loki-magic));
+}
+
+.runic-rotate-clockwise {
+  transform-origin: 400px 240px;
+  animation: rotate-clockwise 80s linear infinite;
+}
+
+.runic-rotate-counter {
+  transform-origin: 400px 240px;
+  animation: rotate-counter 60s linear infinite;
+}
+
+@keyframes rotate-clockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes rotate-counter {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+/* Organic Tree Trunk & Foliage Backdrop */
+.tree-trunk-path {
+  fill: none;
+  stroke: #161c26;
+  stroke-linecap: round;
+  transition: stroke var(--transition-normal), filter var(--transition-normal);
+}
+
+body.light-theme .tree-trunk-path {
+  stroke: #c5ccd6;
+}
+
+.tree-trunk-glow {
+  fill: none;
+  stroke: var(--loki-magic);
+  stroke-linecap: round;
+  opacity: 0.02;
+  filter: blur(8px);
+  transition: opacity var(--transition-normal);
+}
+
+.yggdrasil-tree-panel:hover .tree-trunk-glow {
+  opacity: 0.07;
+}
+
+.canopy-backdrop {
+  fill: var(--loki-magic-light);
+  opacity: 0.15;
+  filter: blur(45px);
+  pointer-events: none;
+  transition: opacity var(--transition-normal);
+}
+
+.yggdrasil-tree-panel:hover .canopy-backdrop {
+  opacity: 0.28;
+}
+
+/* Hanging vines sway animation */
+.hanging-vine {
+  fill: none;
+  stroke: var(--loki-magic-dim);
+  stroke-width: 0.8px;
+  stroke-dasharray: 2 4;
+  transform-origin: center top;
+  animation: vine-sway 7s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes vine-sway {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(3deg) translateX(-1px); }
+}
+
+/* Landscape Valley Accents */
+.mountain-shape {
+  fill: #0a0d13;
+  opacity: 0.94;
+  stroke: var(--border-medium);
+  stroke-width: 0.5px;
+  transition: fill var(--transition-normal), stroke var(--transition-normal);
+}
+
+body.light-theme .mountain-shape {
+  fill: #e9eef5;
+  stroke: var(--border-light);
+}
+
+.crescent-moon {
+  fill: var(--white);
+  opacity: 0.15;
+  filter: drop-shadow(0 0 6px var(--white));
+  transition: opacity var(--transition-normal);
+}
+
+.yggdrasil-tree-panel:hover .crescent-moon {
+  opacity: 0.35;
+}
+
+/* Responsive tree layout adjustments */
+@media (max-width: 991px) {
+  .yggdrasil-section-wrapper {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .yggdrasil-tree-panel {
+    padding: 0.75rem;
+  }
+  
+  .runic-rotate-clockwise, .runic-rotate-counter {
+    animation-duration: 120s;
+  }
 }
 
 /* Projects / Portfolio Grid */

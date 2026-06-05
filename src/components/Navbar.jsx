@@ -1,38 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function Navbar({ theme, toggleTheme }) {
-  const [visible, setVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      if (currentScrollY < 10) {
-        setVisible(true);
-      } else if (currentScrollY > lastScrollY) {
-        // Scrolling down -> hide navbar
-        setVisible(false);
-        setIsOpen(false); // also close menu on scroll down
-      } else {
-        // Scrolling up -> show navbar
-        setVisible(true);
-      }
-
-      setLastScrollY(currentScrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
 
   const closeMenu = () => {
     setIsOpen(false);
   };
 
   return (
-    <nav className={`navbar navbar-expand-lg navbar-dark ${visible ? 'navbar-visible' : 'navbar-hidden'}`}>
+    <nav className="navbar navbar-expand-lg navbar-dark navbar-visible">
       <div className="container">
         {/* Branding Logo */}
         <a className="nav-logo" href="#" onClick={closeMenu}>

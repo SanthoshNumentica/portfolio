@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import reactLogo from '../assets/react.svg';
 
 const roles = [
@@ -29,7 +29,7 @@ export default function HeroSection() {
       <div className="row align-items-center w-100 g-5">
         
         {/* Left Side: Headline and copy */}
-        <div className="col-lg-6 order-2 order-lg-1">
+        <div className="col-lg-6 text-lg-start">
           <div className="hero-greeting">Hello, I'm a</div>
           <h1 className="hero-title" style={{ minHeight: '130px' }}>
             Senior <span className={`hero-role-text ${animate ? 'fade-slide-in' : 'fade-slide-out'}`}>{roles[currentRoleIndex]}</span>
@@ -37,7 +37,7 @@ export default function HeroSection() {
           <p className="hero-description">
             I architect AI-driven enterprise platforms, production LLM pipelines, and predictive risk modeling systems. Leveraging deep expertise across React, Node.js, and Python to transform concepts into scalable, production-ready software.
           </p>
-          <div className="d-flex flex-wrap gap-3 mt-4">
+          <div className="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 mt-4">
             <a href="#projects" className="primary-btn">
               View Portfolio
             </a>
@@ -48,7 +48,7 @@ export default function HeroSection() {
         </div>
 
         {/* Right Side: Portrait overlapping green polygons */}
-        <div className="col-lg-6 order-1 order-lg-2 text-center">
+        <div className="col-lg-6 text-center">
           <div className="hero-image-wrapper">
             <div className="hero-image-backdrop"></div>
             <div className="hero-polygon-bg"></div>

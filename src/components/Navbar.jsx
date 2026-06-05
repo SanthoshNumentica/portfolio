@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Navbar({ theme, toggleTheme }) {
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,6 +14,7 @@ export default function Navbar({ theme, toggleTheme }) {
       } else if (currentScrollY > lastScrollY) {
         // Scrolling down -> hide navbar
         setVisible(false);
+        setIsOpen(false); // also close menu on scroll down
       } else {
         // Scrolling up -> show navbar
         setVisible(true);
@@ -25,57 +27,60 @@ export default function Navbar({ theme, toggleTheme }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
   return (
     <nav className={`navbar navbar-expand-lg navbar-dark ${visible ? 'navbar-visible' : 'navbar-hidden'}`}>
       <div className="container">
         {/* Branding Logo */}
-        <a className="nav-logo" href="#">
+        <a className="nav-logo" href="#" onClick={closeMenu}>
           S<span>.</span>Subramani
         </a>
 
         {/* Hamburger Menu (Mobile) */}
         <button
-          className="navbar-toggler"
+          className={`navbar-toggler ${isOpen ? '' : 'collapsed'}`}
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#mainNav"
+          onClick={() => setIsOpen(!isOpen)}
           aria-controls="mainNav"
-          aria-expanded="false"
+          aria-expanded={isOpen}
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
 
         {/* Centered links and right buttons */}
-        <div className="collapse navbar-collapse" id="mainNav">
+        <div className={`collapse navbar-collapse ${isOpen ? 'show' : ''}`} id="mainNav">
           <ul className="navbar-nav mx-auto gap-1 gap-lg-2">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">
+              <a className="nav-link active" aria-current="page" href="#" onClick={closeMenu}>
                 Hello
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#about">
+              <a className="nav-link" href="#about" onClick={closeMenu}>
                 About
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#services">
+              <a className="nav-link" href="#services" onClick={closeMenu}>
                 Services
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#projects">
+              <a className="nav-link" href="#projects" onClick={closeMenu}>
                 Portfolio
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#work">
+              <a className="nav-link" href="#work" onClick={closeMenu}>
                 Experience
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#contact">
+              <a className="nav-link" href="#contact" onClick={closeMenu}>
                 Contact
               </a>
             </li>
@@ -109,7 +114,7 @@ export default function Navbar({ theme, toggleTheme }) {
             </button>
 
             {/* Let's Talk CTA button */}
-            <a href="#contact" className="talk-btn">
+            <a href="#contact" className="talk-btn" onClick={closeMenu}>
               Let's Talk
             </a>
           </div>

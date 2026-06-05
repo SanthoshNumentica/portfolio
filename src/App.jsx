@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Tooltip } from 'bootstrap';
 import Navbar from './components/Navbar';
 import ProfileCard from './components/ProfileCard';

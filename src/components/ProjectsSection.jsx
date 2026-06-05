@@ -1,4 +1,3 @@
-import React from 'react';
 
 const projects = [
   {
@@ -106,6 +105,26 @@ export default function ProjectsSection() {
                     <li key={bIdx} className="mb-2">{bullet}</li>
                   ))}
                 </ul>
+                
+                {/* Mobile/Tablet direct action buttons */}
+                <div className="portfolio-mobile-links">
+                  <a
+                    href={proj.demoUrl}
+                    className="portfolio-mobile-btn"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="bi bi-eye-fill"></i> Live Demo
+                  </a>
+                  <a
+                    href={proj.githubUrl}
+                    className="portfolio-mobile-btn"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="bi bi-github"></i> GitHub
+                  </a>
+                </div>
               </div>
 
               <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.04)', paddingTop: 'var(--space-md)' }}>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+  <!-- Background Gradient with rounded corners -->
+  <rect width="64" height="64" rx="16" fill="#00E6B8" />
+  
+  <!-- Code Brackets -->
+  <path d="M24 20L14 32L24 44" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M40 20L50 32L40 44" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- Slash representing code or development -->
+  <path d="M36 16L28 48" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- Gradient Definitions -->
+  <defs>
+    <linearGradient id="paint0_linear" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#10B981" />
+      <stop offset="0.5" stop-color="#3B82F6" />
+      <stop offset="1" stop-color="#8B5CF6" />
+    </linearGradient>
+  </defs>
+</svg> 
